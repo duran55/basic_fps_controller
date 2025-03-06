@@ -69,5 +69,3 @@ func _physics_process(delta):
 	
 	move_and_slide_with_snap(movement, snap, Vector3.UP)
 	
-	
-	
