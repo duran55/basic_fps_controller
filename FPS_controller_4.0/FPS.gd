@@ -1,9 +1,9 @@
 extends CharacterBody3D
 
-
 var speed = 7
 const ACCEL_DEFAULT = 7
-const ACCEL_AIR = 1
+const ACCEL_AIR = 5
+
 @onready var accel = ACCEL_DEFAULT
 var gravity = 9.8
 var jump = 5
@@ -41,7 +41,11 @@ func _process(delta):
 		camera.global_transform = head.global_transform
 		
 func _physics_process(delta):
+	
 	#get keyboard input
+	if Input.is_action_just_pressed("quit"):
+		get_tree().quit()
+		
 	direction = Vector3.ZERO
 	var h_rot = global_transform.basis.get_euler().y
 	var f_input = Input.get_action_strength("move_backward") - Input.get_action_strength("move_forward")
@@ -56,10 +60,18 @@ func _physics_process(delta):
 		accel = ACCEL_AIR
 		gravity_vec += Vector3.DOWN * gravity * delta
 		
-	if Input.is_action_just_pressed("jump") and is_on_floor():
+	# using is_action_pressed for bunny hop style jumping
+	if Input.is_action_pressed("jump") and is_on_floor():
 		gravity_vec = Vector3.UP * jump
 	velocity.y = 0
-	#make it move
+	
+	# walk
+	if Input.is_action_pressed("walk"):
+		speed = 3
+	else:
+		speed = 7
+	
+	# make it move
 	movement = velocity.lerp(direction * speed, accel * delta)
 	velocity = movement + gravity_vec
 	
