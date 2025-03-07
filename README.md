@@ -8,6 +8,13 @@ Features include:
 - physics interpolation to reduce jitter on high refresh rate monitors
 - solves all weird slope sliding/climbing issues 
 
+Changes of this fork:
+
+- increase air accel to make it more fun
+- add bunny hop style jumping: no skills required, just hold the jump button
+- add walk action: holding walk button will make the player move slower
+- add quit action: quit from the game / project
+
 Suggestions:
 
 - attach FPS.gd to the main node (kinematic body) of FPS.tscn
