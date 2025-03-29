@@ -74,7 +74,11 @@ func _physics_process(delta):
 		speed = 3
 	else:
 		speed = 7
-	
+
+	# head bump
+	if is_on_ceiling():
+		gravity_vec.y = min(gravity_vec.y, 0)
+
 	# make it move
 	velocity = velocity.linear_interpolate(direction * speed, accel * delta)
 	movement = velocity + gravity_vec
